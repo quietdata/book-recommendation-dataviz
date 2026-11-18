@@ -1,0 +1,8 @@
+text
+
+# Cache et pramètres locaux Power BI (.pbip)
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Fichiers binaires lourds
+.pbix
