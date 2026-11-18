@@ -49,9 +49,11 @@ Explorateur de recommandations (interactif) : outil de recherche dynamique par a
 
 ## Contenu du dépôt
 
-sql : scripts sql réalisés sous Navicat (création de structure, nettoyage et requêtes d'analyse)
+- **sql** : scripts sql réalisés sous Navicat (création de structure, nettoyage et requêtes d'analyse)
 
-Book_recommendation_screen.pdf : export PDF de l'ensemble des pages pour une consultation rapide sans Power BI
+ - **Book_recommendation_screen.pdf** : export PDF de l'ensemble des pages pour une consultation rapide sans Power BI
+
+ - **Book_recommendation_Dashboard.pbip (avec .Report et .SemanticModel)** : fichiers Power BI contenant le modèle de données, les mesures et la datavisualisation.
 	
 
 ## Principaux enseignements et regard critique
