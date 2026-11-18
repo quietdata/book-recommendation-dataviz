@@ -52,10 +52,6 @@ Explorateur de recommandations (interactif) : outil de recherche dynamique par a
 sql : scripts sql réalisés sous Navicat (création de structure, nettoyage et requêtes d'analyse)
 
 Book_recommendation_screen.pdf : export PDF de l'ensemble des pages pour une consultation rapide sans Power BI
-
-#### Remarque :
-Le fichier source complet du rapport Power BI Desktop (Book_recommendation_Dashboard.pbix) n'a pas pu être téléversé car sa taille dépasse la limite
-autorisée par GitHub.
 	
 
 ## Principaux enseignements et regard critique
