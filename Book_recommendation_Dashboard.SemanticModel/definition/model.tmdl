@@ -1,0 +1,22 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["users","books","ratings"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table users
+ref table books
+ref table ratings
+ref table ClusterMappingTable
+
+ref cultureInfo fr-FR
+

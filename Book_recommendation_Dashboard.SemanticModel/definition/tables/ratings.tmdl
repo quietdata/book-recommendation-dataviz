@@ -1,0 +1,146 @@
+table ratings
+	lineageTag: 7571f345-6357-4a8a-afa2-62e9acd8e1d6
+
+	measure 'Total Ratings' = COUNTROWS(ratings)
+		formatString: #,0
+		lineageTag: be38d8f5-868a-4b36-8996-ceff1356024d
+
+	measure 'avg ratings' = ```
+			
+			// CALCULATE(
+			//     AVERAGE(Ratings[Book-Rating]),
+			//     ratings[Book-Rating] > 0
+			// )
+			// avg ratings = 
+			CALCULATE(
+			    AVERAGE(Ratings[Book-Rating]),
+			    KEEPFILTERS(Ratings[Book-Rating] > 0)
+			)
+			```
+		lineageTag: dd6c9ff5-20b5-4ab2-82a8-35ea58e360d4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"books","TableItemName":"Editeurs_clusters","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	measure 'rated books' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(Ratings[ISBN]),
+			    Ratings[Book-Rating] > 0
+			)
+		formatString: 0
+		lineageTag: f68f92ac-e5f6-43b0-a47f-3d00ba70f977
+
+	measure 'Explicit Ratings' =
+			
+			CALCULATE(
+			    COUNTROWS(ratings),
+			    ratings[Book-Rating] > 0
+			)
+		formatString: 0
+		lineageTag: fa3eb155-b232-4e11-a37d-b99da60df9fe
+
+	measure 'Implicit Ratings' =
+			
+			CALCULATE(
+			    COUNTROWS(ratings),
+			    ratings[Book-Rating] = 0
+			)
+		formatString: 0
+		lineageTag: 8b41fbd9-20c6-46bd-9a78-3a53cef79df4
+
+	measure Top_Note_50_Votes = ```
+			
+			// VAR NbVotesTotal = 
+			//     CALCULATE(
+			//         COUNTROWS(Ratings), 
+			//         REMOVEFILTERS(Ratings[Book-Rating]),
+			//         Ratings[Book-Rating] > 0
+			//     )
+			// RETURN
+			// IF(
+			//     NbVotesTotal >= 50,
+			//     [avg ratings],
+			//     BLANK()
+			// )
+			// Top_Note_50_Votes = 
+			VAR NbVotesTotal = 
+			    CALCULATE(
+			        COUNTROWS(Ratings), 
+			        REMOVEFILTERS(Ratings[Book-Rating]),
+			        Ratings[Book-Rating] > 0
+			    )
+			VAR NbVotesSelection = CALCULATE(COUNTROWS(Ratings), KEEPFILTERS(Ratings[Book-Rating] > 0))
+			RETURN
+			IF(
+			    NbVotesTotal >= 50 && NbVotesSelection > 0,
+			    [avg ratings] + (NbVotesSelection / 1000000),
+			    BLANK()
+			)
+			```
+		lineageTag: 93d4a69a-b0ca-4e4c-a70d-c225743ca36e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Avg_Catalog_rating = CALCULATE(AVERAGE(Ratings[Book-Rating]), ALL(Books), Ratings[Book-Rating] > 0)
+		lineageTag: 6ed662fd-cb4a-4ee0-a3a7-028c119e40e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column User-ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 77a75551-168f-482a-b2b0-39afcb68d45a
+		summarizeBy: none
+		sourceColumn: User-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISBN
+		dataType: string
+		lineageTag: 3c918640-b62c-424f-85fe-e68e99ff6d47
+		summarizeBy: none
+		sourceColumn: ISBN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Book-Rating
+		dataType: int64
+		formatString: 0
+		lineageTag: fcf9446e-74a2-4e27-b526-d19270c9d796
+		summarizeBy: sum
+		sourceColumn: Book-Rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rating_Quality = ```
+			
+			SWITCH(
+			    TRUE(),
+			    Ratings[Book-Rating] = 0, "Implicite (0)",
+			    Ratings[Book-Rating] >= 8, "Excellente (8-10)",
+			    "Moyenne / Faible (1-7)"
+			)
+			
+			```
+		lineageTag: ba100b99-0860-4193-a0e0-3dc2650c2eed
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ratings = m
+		mode: import
+		source =
+				let
+				  Source = MySQL.Database("localhost", "book_reco_db"),
+				  #"Navigation 1" = Source{[Schema = "book_reco_db", Item = "ratings_clean"]}[Data]
+				in
+				  #"Navigation 1"
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Exception
+
+	annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"books","TableItemName":"Editeurs_clusters","ObjectType":4},"LinkType":"UsedInGroup"}]
+

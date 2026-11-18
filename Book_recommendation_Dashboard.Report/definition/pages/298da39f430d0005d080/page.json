@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "298da39f430d0005d080",
+  "displayName": "Vue d'ensemble",
+  "displayOption": "ActualSize",
+  "height": 1080,
+  "width": 1920,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "baecae0d36797657d864",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "z_OLD_books"
+              }
+            },
+            "Property": "OLD_Total Books"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "5922f098e0dd96d9b7e4",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "bc9e682813d4043a502a",
+        "boundFilter": "baecae0d36797657d864",
+        "fieldExpr": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "z_OLD_books"
+              }
+            },
+            "Property": "OLD_Total Books"
+          }
+        }
+      }
+    ]
+  }
+}

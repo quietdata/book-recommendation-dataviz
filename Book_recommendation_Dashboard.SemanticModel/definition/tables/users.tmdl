@@ -1,0 +1,121 @@
+table users
+	lineageTag: b414e0e3-e783-4297-89eb-d8dbad023a37
+
+	measure 'Total Users' = DISTINCTCOUNT(Users[User-ID])
+		formatString: #,0
+		lineageTag: 2318292e-2260-45da-8f1d-866273b2f010
+
+	column User-ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 14822742-e6e4-486b-ab84-43a60a90c1ef
+		summarizeBy: none
+		sourceColumn: User-ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 7b8cee72-513b-4617-b9ac-4fdef81bb0ef
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: double
+		lineageTag: fe26d806-3967-417f-974c-80a6791d32cb
+		summarizeBy: none
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column City
+		dataType: string
+		lineageTag: 3954b299-e4ff-4450-b021-7bf0920b7663
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 6e3798bb-0fad-4378-bb93-64c54582e728
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 9dfde364-116c-4357-91cf-0d5727dfbcd1
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location_Valide
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e7c1cb84-ee5d-45d3-8cc8-9c350f457f74
+		summarizeBy: none
+		sourceColumn: Location_Valide
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country_final
+		dataType: string
+		lineageTag: f2fc4980-c343-44dc-b25b-fe348e993813
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country_final
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age_group = ```
+			
+			VAR AgeNum = IFERROR(VALUE(Users[Age]), -1)
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    AgeNum < 5 || AgeNum > 100, "Non renseigné",
+			    AgeNum < 18, "1. < 18 ans",
+			    AgeNum <= 25, "2. 18-25 ans",
+			    AgeNum <= 35, "3. 26-35 ans",
+			    AgeNum <= 50, "4. 36-50 ans",
+			    "5. 50+ ans"
+			)
+			
+			```
+		lineageTag: 68341634-9375-4794-ab60-04f66c8254a4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut_Lecteur =
+			
+			IF(
+			    COUNTROWS(RELATEDTABLE(Ratings)) > 0,
+			    "Lecteur actif (1+ note)",
+			    "Inscrit sans activité"
+			)
+		lineageTag: adb3f3ee-ea61-43d3-b512-04a2efb804e2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition users = m
+		mode: import
+		source =
+				let
+				  Source = MySQL.Database("localhost", "book_reco_db"),
+				  #"Navigation 1" = Source{[Schema = "book_reco_db", Item = "users"]}[Data],
+				  #"Colonne personnalisée ajoutée" = Table.AddColumn(#"Navigation 1", "Country_final", each Text.Trim(Text.Select(Text.Upper([Country]), {"A".."Z", " "}))),
+				  #"Type de colonne changé" = Table.TransformColumnTypes(#"Colonne personnalisée ajoutée", {{"Country_final", type text}})
+				in
+				  #"Type de colonne changé"
+
+	annotation PBI_ResultType = Table
+

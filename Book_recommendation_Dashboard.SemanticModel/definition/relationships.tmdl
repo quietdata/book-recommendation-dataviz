@@ -1,0 +1,8 @@
+relationship b7d25cd0-638b-d216-0f74-fd49c53de0dd
+	fromColumn: ratings.User-ID
+	toColumn: users.User-ID
+
+relationship 1e648d43-488e-7cf1-82b8-3eff1f00141e
+	fromColumn: ratings.ISBN
+	toColumn: books.ISBN
+

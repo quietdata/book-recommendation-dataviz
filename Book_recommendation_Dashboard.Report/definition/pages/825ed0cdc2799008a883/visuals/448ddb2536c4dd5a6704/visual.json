@@ -1,0 +1,156 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "448ddb2536c4dd5a6704",
+  "position": {
+    "x": 14,
+    "y": 0,
+    "z": 1,
+    "height": 457,
+    "width": 809,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "keyDriversVisual",
+    "query": {
+      "queryState": {
+        "ExplainBy": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "users"
+                    }
+                  },
+                  "Property": "Age_group"
+                }
+              },
+              "queryRef": "users.Tranche_Age",
+              "nativeQueryRef": "Tranche d'âge",
+              "displayName": "Tranche d'âge"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Decade"
+                }
+              },
+              "queryRef": "books.Decade",
+              "nativeQueryRef": "Décennie",
+              "displayName": "Décennie"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "users"
+                    }
+                  },
+                  "Property": "Country_final"
+                }
+              },
+              "queryRef": "users.Country_final",
+              "nativeQueryRef": "Pays",
+              "displayName": "Pays"
+            }
+          ]
+        },
+        "Target": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ratings"
+                    }
+                  },
+                  "Property": "Rating_Quality"
+                }
+              },
+              "queryRef": "ratings.Rating_Quality",
+              "nativeQueryRef": "Qualité des notes",
+              "displayName": "Qualité des notes"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "keyDrivers": [
+        {
+          "properties": {
+            "targetValue": {
+              "expr": {
+                "Literal": {
+                  "Value": "'''Excellente (8-10)'''"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "30ccc394a274d34c4166",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "ratings"
+              }
+            },
+            "Property": "Book-Rating"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "r",
+              "Entity": "ratings",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 1,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "r"
+                        }
+                      },
+                      "Property": "Book-Rating"
+                    }
+                  },
+                  "Right": {
+                    "Literal": {
+                      "Value": "0L"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User"
+      }
+    ]
+  }
+}

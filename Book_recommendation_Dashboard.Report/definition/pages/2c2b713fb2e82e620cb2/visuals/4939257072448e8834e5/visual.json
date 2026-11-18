@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "4939257072448e8834e5",
+  "position": {
+    "x": 382,
+    "y": 358,
+    "z": 6000,
+    "height": 334,
+    "width": 344,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "keyDriversVisual",
+    "query": {
+      "queryState": {
+        "ExplainBy": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "users"
+                    }
+                  },
+                  "Property": "Age_group"
+                }
+              },
+              "queryRef": "users.Tranche_Age",
+              "nativeQueryRef": "Age_group"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "users"
+                    }
+                  },
+                  "Property": "Country_final"
+                }
+              },
+              "queryRef": "users.Country_final",
+              "nativeQueryRef": "Country_final"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Decade"
+                }
+              },
+              "queryRef": "books.Decade",
+              "nativeQueryRef": "Decade"
+            }
+          ]
+        },
+        "Target": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ratings"
+                    }
+                  },
+                  "Property": "Book-Rating"
+                }
+              },
+              "queryRef": "ratings.Book-Rating",
+              "nativeQueryRef": "Book-Rating"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

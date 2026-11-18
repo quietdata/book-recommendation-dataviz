@@ -1,0 +1,73 @@
+table ClusterMappingTable
+	isHidden
+	isPrivate
+	lineageTag: d735dc00-8f99-43e5-b2c3-fcdc376370f2
+
+	column Publisher
+		lineageTag: 96be205f-24c4-45b7-8f63-357ae2f57542
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Publisher]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"books","TableItemName":"Editeurs_clusters","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	column ClusterId
+		formatString: 0
+		lineageTag: fafe4e4d-5a4e-45ea-84c0-b09f34b4c289
+		summarizeBy: count
+		isNameInferred
+		sourceColumn: [ClusterId]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"books","TableItemName":"Editeurs_clusters","ObjectType":4},"LinkType":"UsedInGroup"}]
+
+	partition ClusterMappingTable = calculated
+		mode: import
+		source = ```
+				VAR __ValueFilterDM0 = 
+					FILTER(
+						KEEPFILTERS(
+							SUMMARIZECOLUMNS(
+								'books'[Publisher],
+								"Total_Books", 'books'[Total Books],
+								"avg_ratings", 'ratings'[avg ratings]
+							)
+						),
+						[avg_ratings] > 0
+					)
+				
+				VAR __DS0Core = 
+					SUMMARIZECOLUMNS(
+						'books'[Publisher],
+						__ValueFilterDM0,
+						"Total_Books", 'books'[Total Books],
+						"avg_ratings", 'ratings'[avg ratings]
+					)
+				
+				VAR __DataTransformT0 = 
+					KMeansClustering(
+						SELECTCOLUMNS(
+							__DS0Core,
+							"Publisher", 'books'[Publisher],
+							"Total_Books", [Total_Books],
+							"avg_ratings", [avg_ratings]
+						),
+						{("[Publisher]", "Item"),
+							("[Total_Books]", "Attribute"),
+							("[avg_ratings]", "Attribute")},
+						{("[Publisher]", BLANK()),
+							("ClusterId", "ClusterId")},
+						-1
+					)
+				
+				RETURN __DataTransformT0
+				```
+			retainDataTillForceCalculate
+
+	annotation ClusterMappingTable = true
+
+	annotation __PBI_SemanticLinks = [{"LinkTarget":{"TableName":"books","TableItemName":"Editeurs_clusters","ObjectType":4},"LinkType":"UsedInGroup"}]
+

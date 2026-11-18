@@ -1,0 +1,61 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 1020.4277058829247,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 881.23893805309751,
+            "y": 2.2345132743362832
+          },
+          "nodeIndex": "users",
+          "nodeLineageTag": "b414e0e3-e783-4297-89eb-d8dbad023a37",
+          "size": {
+            "height": 281.51769911504425,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1595.8520765633664,
+            "y": 0
+          },
+          "nodeIndex": "books",
+          "nodeLineageTag": "57c83a63-a3ec-4378-90ad-531b907023fe",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1239.664023466021,
+            "y": 0
+          },
+          "nodeIndex": "ratings",
+          "nodeLineageTag": "7571f345-6357-4a8a-afa2-62e9acd8e1d6",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 89.504950495049513,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

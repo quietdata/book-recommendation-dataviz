@@ -1,0 +1,301 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "f8e30850369700e3160b",
+  "position": {
+    "x": 157,
+    "y": 93,
+    "z": 0,
+    "height": 400,
+    "width": 666,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Image-URL-M"
+                }
+              },
+              "queryRef": "books.Image-URL-M",
+              "nativeQueryRef": "Couverture du livre",
+              "displayName": "Couverture du livre"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ratings"
+                    }
+                  },
+                  "Property": "Total Ratings"
+                }
+              },
+              "queryRef": "ratings.Total Ratings",
+              "nativeQueryRef": "Total Ratings"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Book-Title"
+                }
+              },
+              "queryRef": "books.Book-Title",
+              "nativeQueryRef": "Titre",
+              "displayName": "Titre"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Book-Author"
+                }
+              },
+              "queryRef": "books.Book-Author",
+              "nativeQueryRef": "Auteur",
+              "displayName": "Auteur"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Publisher"
+                }
+              },
+              "queryRef": "books.Publisher",
+              "nativeQueryRef": "Editeur",
+              "displayName": "Editeur"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "books"
+                    }
+                  },
+                  "Property": "Year_of_publication_clean"
+                }
+              },
+              "queryRef": "books.Year_of_publication_clean",
+              "nativeQueryRef": "Année de publication",
+              "displayName": "Année de publication"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ratings"
+                    }
+                  },
+                  "Property": "Explicit Ratings"
+                }
+              },
+              "queryRef": "ratings.Explicit Ratings",
+              "nativeQueryRef": "Nombres de votes",
+              "displayName": "Nombres de votes"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "ratings"
+                        }
+                      },
+                      "Property": "Book-Rating"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "Sum(ratings.Book-Rating)",
+              "nativeQueryRef": "Nombre d'interactions",
+              "displayName": "Nombre d'interactions"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ratings"
+                    }
+                  },
+                  "Property": "avg ratings"
+                }
+              },
+              "queryRef": "ratings.avg ratings",
+              "nativeQueryRef": "Note moyenne",
+              "displayName": "Note moyenne"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "ratings"
+                  }
+                },
+                "Property": "Explicit Ratings"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "books.Book-Title"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "67D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "books.Book-Author"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "71D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "books.Publisher"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "81D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "books.Year_of_publication_clean"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "books.Image-URL-M"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "58D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ratings.Explicit Ratings"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "96D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(ratings.Book-Rating)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "71D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "ratings.avg ratings"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
